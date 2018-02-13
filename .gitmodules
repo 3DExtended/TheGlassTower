@@ -1,0 +1,3 @@
+[submodule "TheGlassTower/Dependencies"]
+	path = TheGlassTower/Dependencies
+	url = git@bitbucket.org:theglasstower/contentheglasstower.git
