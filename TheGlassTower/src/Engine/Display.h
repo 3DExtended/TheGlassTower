@@ -4,7 +4,7 @@
 #include <GL/glew.h>
 #include <iostream>	
 
-namespace ENGINE {
+namespace engine {
 	class Display
 	{
 	public:

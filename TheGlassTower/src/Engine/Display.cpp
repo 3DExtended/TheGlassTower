@@ -1,6 +1,6 @@
 #include "Display.h"
 
-using namespace ENGINE;
+using namespace engine;
 
 Display* Display::instance = nullptr;
 Display::Display(int width, int height, const std::string title)
@@ -64,7 +64,7 @@ Display::~Display()
 
 void Display::ClearBuffer()
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 }
 
 void Display::SwapBuffer()
