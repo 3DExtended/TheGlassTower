@@ -8,64 +8,42 @@
 namespace engine {
 	class Display
 	{
+		friend class Engine;
 	public:
-		/// <summary>
-		/// Creates a new window and a new OpenGL context 
-		/// which we need to render to.
-		/// </summary>
-		/// <param name="width">The width of the new window</param>
-		/// <param name="height">The height of the new window</param>
-		/// <param name="title">The title of the window</param>
-		Display(int width, int height, const std::string title);
+		// display size
+		void setWidth(int32_t width);
+		int32_t getWidth();
+		void setHeight(int32_t height);
+		int32_t getHeight();
+		void setSize(int32_t width, int32_t height);
 
+		// display title
+		void setTitle(std::string title);
+		std::string getTitle();
+
+	private:
+		// create display
+		Display(int32_t width, int32_t height, std::string title);
+
+		// destroy display
 		~Display();
+		// clears backbuffer
+		void clearBuffer();
 
-		/// <summary>
-		/// Redraws the GLClearColor on the buffer and resets the depth buffer
-		/// </summary>
-		void ClearBuffer();
+		// swaps back and frontbuffer
+		void swapBuffer();
 
-		/// <summary>
-		/// In order to show an image/buffer we need to 
-		/// swap between two existing buffers
-		/// </summary>
-		void SwapBuffer();
+		// width and height of window
+		int32_t m_width;
+		int32_t m_height;
 
-		/// <summary>
-		/// Returns the width of that window
-		/// </summary>
-		/// <returns>Width of the window</returns>
-		int inline GetWidth() { return width; }
+		// window title
+		std::string m_title;
 
-		/// <summary>
-		/// Returns the height of that window
-		/// </summary>
-		/// <returns>Height of the window</returns>
-		int inline GetHeight() { return height; }
+		// the OpenGL context needed to work with the GPU
+		SDL_GLContext m_glContext;
 
-		/// <summary>
-		/// This call sets the clear color of the window to a certain color
-		/// </summary>
-		/// <param name="r">Red part of color (Range 0-1)</param>
-		/// <param name="g">Green part of color (Range 0-1)</param>
-		/// <param name="b">Blue part of color (Range 0-1)</param>
-		void SetClearColor(float r, float g, float b);
-
-		static Display* GetInstance();
-	private:
-		//width and height of window
-		int width, height;
-
-		//the OpenGL context needed to work with the GPU
-		SDL_GLContext glContext;
-
-		//The window handler by SDL2
-		SDL_Window * window;
-
-
-		static Display* instance;
-
-	private:
-		void SetMousePosition(int x, int y);
+		// the window handler by SDL2
+		SDL_Window * m_window;
 	};
 }

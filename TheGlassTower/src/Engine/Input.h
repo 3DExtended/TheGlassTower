@@ -3,7 +3,7 @@
 
 namespace engine {
 	class Input {
-		friend class EngineClass;
+		friend class Engine;
 	public:
 		// Sichert sich Speicher für Key und Button States
 		Input();
