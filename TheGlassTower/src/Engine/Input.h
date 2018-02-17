@@ -11,16 +11,16 @@ namespace engine {
 		~Input();
 
 		// Key State Abfragen
-		bool isKeyDown(int scanCode);
-		bool isKeyUp(int scanCode);
-		bool isKeyPressed(int scanCode);
-		bool isKeyReleased(int scanCode);
+		bool isKeyDown(int32_t scanCode);
+		bool isKeyUp(int32_t scanCode);
+		bool isKeyPressed(int32_t scanCode);
+		bool isKeyReleased(int32_t scanCode);
 
 		// Button State Abfragen
-		bool isButtonDown(int scanCode);
-		bool isButtonUp(int scanCode);
-		bool isButtonPressed(int scanCode);
-		bool isButtonReleased(int scanCode);
+		bool isButtonDown(int32_t scanCode);
+		bool isButtonUp(int32_t scanCode);
+		bool isButtonPressed(int32_t scanCode);
+		bool isButtonReleased(int32_t scanCode);
 
 		// Mouse Position Abfragen
 		int32_t getMousePositionX();

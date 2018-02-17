@@ -17,35 +17,35 @@ namespace engine
 		free(m_keyIsEvent);
 		free(m_keyIsDown);
 	}
-	bool Input::isKeyDown(int scanCode)
+	bool Input::isKeyDown(int32_t scanCode)
 	{
 		return m_keyIsDown[scanCode];
 	}
-	bool Input::isKeyUp(int scanCode)
+	bool Input::isKeyUp(int32_t scanCode)
 	{
 		return !m_keyIsDown[scanCode];
 	}
-	bool Input::isKeyPressed(int scanCode)
+	bool Input::isKeyPressed(int32_t scanCode)
 	{
 		return m_keyIsDown[scanCode] && m_keyIsEvent;
 	}
-	bool Input::isKeyReleased(int scanCode)
+	bool Input::isKeyReleased(int32_t scanCode)
 	{
 		return (!m_keyIsDown[scanCode]) && m_keyIsEvent;
 	}
-	bool Input::isButtonDown(int scanCode)
+	bool Input::isButtonDown(int32_t scanCode)
 	{
 		return m_buttonIsDown[scanCode];
 	}
-	bool Input::isButtonUp(int scanCode)
+	bool Input::isButtonUp(int32_t scanCode)
 	{
 		return !m_buttonIsDown[scanCode];
 	}
-	bool Input::isButtonPressed(int scanCode)
+	bool Input::isButtonPressed(int32_t scanCode)
 	{
 		return m_buttonIsDown[scanCode] && m_buttonIsEvent[scanCode];
 	}
-	bool Input::isButtonReleased(int scanCode)
+	bool Input::isButtonReleased(int32_t scanCode)
 	{
 		return (!m_buttonIsDown[scanCode]) && m_buttonIsEvent[scanCode];
 	}
