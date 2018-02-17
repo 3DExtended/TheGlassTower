@@ -5,32 +5,32 @@ namespace engine {
 	class Input {
 		friend class Engine;
 	public:
-		// Sichert sich Speicher für Key und Button States
+		// mallocs memory for arrays
 		Input();
-		// Gibt Speicher frei
+		// frees memory
 		~Input();
 
-		// Key State Abfragen
+		// Key States
 		bool isKeyDown(int32_t scanCode);
 		bool isKeyUp(int32_t scanCode);
 		bool isKeyPressed(int32_t scanCode);
 		bool isKeyReleased(int32_t scanCode);
 
-		// Button State Abfragen
+		// Button States
 		bool isButtonDown(int32_t scanCode);
 		bool isButtonUp(int32_t scanCode);
 		bool isButtonPressed(int32_t scanCode);
 		bool isButtonReleased(int32_t scanCode);
 
-		// Mouse Position Abfragen
+		// Mouse Position
 		int32_t getMousePositionX();
 		int32_t getMousePositionY();
 
-		// Mouse Speed Abfragen
+		// Mouse Speed
 		int32_t getMouseSpeedX();
 		int32_t getMouseSpeedY();
 
-		// Mouse Scroll Abfragen
+		// Mouse Scroll
 		int32_t getMouseScrollX();
 		int32_t getMouseScrollY();
 
@@ -61,7 +61,7 @@ namespace engine {
 		void setMousePosition(int32_t x, int32_t y);
 		void setMouseScroll(int32_t x, int32_t y);
 
-		// Pre und Post
+		// Pre and Post
 		void inputPreUpdate();
 		void inputPostUpdate();
 	};
