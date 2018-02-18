@@ -165,6 +165,7 @@
     <ClCompile Include="src\Engine\Display.cpp" />
     <ClCompile Include="src\Main\TheGlassTower.cpp" />
     <ClCompile Include="src\Main\stdafx.cpp" />
+    <ClCompile Include="src\_ThirdParty\lodepng.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Main\GameTest.h" />
@@ -174,6 +175,7 @@
     <ClInclude Include="src\Engine\Display.h" />
     <ClInclude Include="src\Main\stdafx.h" />
     <ClInclude Include="src\Main\targetver.h" />
+    <ClInclude Include="src\_ThirdParty\lodepng.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

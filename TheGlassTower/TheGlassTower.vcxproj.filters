@@ -36,6 +36,9 @@
     <ClCompile Include="src\Main\GameTest.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="src\_ThirdParty\lodepng.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Main\stdafx.h">
@@ -57,6 +60,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="src\Main\GameTest.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\_ThirdParty\lodepng.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
