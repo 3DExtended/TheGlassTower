@@ -21,6 +21,9 @@ namespace engine
 		virtual void update() = 0;
 		virtual void render() = 0;
 
+		// Get Input
+		Input * getInput();
+
 	private:
 		// Game Methods
 		void ag_create();
@@ -29,13 +32,13 @@ namespace engine
 		void ag_render();
 
 		// Display
-		Display * display;
+		Display * m_display;
 
 		// Input
-		Input * input;
+		Input * m_input;
 
 		// Thread
-		std::thread * thread;
-		bool done = false;
+		std::thread * m_thread;
+		bool m_done = false;
 	};
 }

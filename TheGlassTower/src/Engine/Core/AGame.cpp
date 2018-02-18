@@ -8,6 +8,10 @@ namespace engine
 	AGame::~AGame()
 	{
 	}
+	Input * AGame::getInput()
+	{
+		return m_input;
+	}
 	void AGame::ag_create()
 	{
 		create();

@@ -38,7 +38,7 @@ namespace engine
 				m_gameLock.lock();
 				for (auto it = m_games.begin(); it != m_games.end(); it++)
 				{
-					if ((*it)->done)
+					if ((*it)->m_done)
 					{
 						delete (*it);
 						m_games.erase(it);
@@ -74,39 +74,39 @@ namespace engine
 		}
 		
 		// Start thread
-		game->thread = new std::thread(&engine::Engine::gameThread, this, game);
+		game->m_thread = new std::thread(&engine::Engine::gameThread, this, game);
 		m_games.push_back(game);
 		m_gameLock.unlock();
 	}
 	void Engine::gameThread(AGame * game)
 	{
 		// SetUp
-		game->display = new Display(800, 600, "The Glass Tower");
-		game->input = new Input();
+		game->m_display = new Display(800, 600, "The Glass Tower");
+		game->m_input = new Input();
 		game->ag_create();
 
 		// Main Loop
-		while (game->input->isRunning()) {
+		while (game->m_input->isRunning()) {
 			// Input
-			game->input->update();
+			game->m_input->update();
 
 			// Update
 			game->ag_update();
 
 			// Clear
-			game->display->clearBuffer();
+			game->m_display->clearBuffer();
 
 			// Render
 			game->ag_render();
 
 			// Swap
-			game->display->swapBuffer();
+			game->m_display->swapBuffer();
 		}
 
 		// TearDown
 		game->ag_destroy();
-		delete game->input;
-		delete game->display;
-		game->done = true;
+		delete game->m_input;
+		delete game->m_display;
+		game->m_done = true;
 	}
 }
