@@ -14,5 +14,4 @@ namespace engine
 	void AGame::ag_render()
 	{
 	}
-
 }
