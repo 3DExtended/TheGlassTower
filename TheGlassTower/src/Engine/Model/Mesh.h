@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <fstream>
 #include "glm\glm.hpp"
 #include "GL\glew.h"
 
