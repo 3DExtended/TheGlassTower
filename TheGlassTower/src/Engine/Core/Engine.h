@@ -2,7 +2,7 @@
 #include "AGame.h"
 #include "Display.h"
 #include "Input.h"
-//#include "PhysX/PxPhysicsAPI.h"
+#include "PhysX/PxPhysicsAPI.h"
 #include <vector>
 #include <mutex>
 
