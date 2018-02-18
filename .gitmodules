@@ -1,6 +1,6 @@
 [submodule "TheGlassTower/Dependencies"]
 	path = TheGlassTower/Dependencies
-	url = https://gamedeve@bitbucket.org/theglasstower/contentheglasstower.git
+	url = https://bitbucket.org/theglasstower/contentheglasstower
 [submodule "TheGlassTower/src/_ThirdParty/aws-sdk-cpp"]
 	path = TheGlassTower/src/_ThirdParty/aws-sdk-cpp
 	url = https://github.com/aws/aws-sdk-cpp.git
