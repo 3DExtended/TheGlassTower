@@ -164,6 +164,8 @@
     <ClCompile Include="src\Engine\Model\ModelStatic.cpp" />
     <ClCompile Include="src\Engine\Shader\ShaderVF.cpp" />
     <ClCompile Include="src\Engine\Shader\ShaderVFSource.cpp" />
+    <ClCompile Include="src\Engine\Texture\Texture2D.cpp" />
+    <ClCompile Include="src\Engine\Texture\Texture2DSource.cpp" />
     <ClCompile Include="src\Main\GameTest.cpp" />
     <ClCompile Include="src\Engine\Core\AGame.cpp" />
     <ClCompile Include="src\Engine\Core\Engine.cpp" />
@@ -180,6 +182,8 @@
     <ClInclude Include="src\Engine\Model\ModelStatic.h" />
     <ClInclude Include="src\Engine\Shader\ShaderVF.h" />
     <ClInclude Include="src\Engine\Shader\ShaderVFSource.h" />
+    <ClInclude Include="src\Engine\Texture\Texture2D.h" />
+    <ClInclude Include="src\Engine\Texture\Texture2DSource.h" />
     <ClInclude Include="src\Main\GameTest.h" />
     <ClInclude Include="src\Engine\Core\AGame.h" />
     <ClInclude Include="src\Engine\Core\Engine.h" />
