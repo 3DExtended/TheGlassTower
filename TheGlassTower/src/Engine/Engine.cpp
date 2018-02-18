@@ -83,6 +83,7 @@ namespace engine
 		// SetUp
 		game->display = new Display(800, 600, "The Glass Tower");
 		game->input = new Input();
+		game->ag_create();
 
 		// Main Loop
 		while (game->input->isRunning()) {
@@ -90,18 +91,20 @@ namespace engine
 			game->input->update();
 
 			// Update
+			game->ag_update();
 
 			// Clear
 			game->display->clearBuffer();
 
 			// Render
-
+			game->ag_render();
 
 			// Swap
 			game->display->swapBuffer();
 		}
 
 		// TearDown
+		game->ag_destroy();
 		delete game->input;
 		delete game->display;
 		game->done = true;
