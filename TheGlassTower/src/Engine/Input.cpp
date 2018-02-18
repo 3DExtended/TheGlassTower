@@ -1,5 +1,6 @@
 #include "Input.h"
 #include "SDL2\SDL.h"
+#include <iostream>
 
 namespace engine
 {
@@ -127,7 +128,7 @@ namespace engine
 		// Event Handling
 		while (SDL_PollEvent(&event))
 		{
-			if (event.type == SDL_WINDOWEVENT_CLOSE)
+			if (event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_CLOSE)
 			{
 				m_isRunning = false;
 			}
