@@ -91,7 +91,7 @@ namespace engine
 		this->texture->push_back(texture.y);
 
 		// Return ID
-		return this->texture->size() / 2 - 1;
+		return (uint32_t) this->texture->size() / 2 - 1;
 	}
 
 	void Mesh::addTriangle(uint32_t indexA, uint32_t indexB, uint32_t indexC)

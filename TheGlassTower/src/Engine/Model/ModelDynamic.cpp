@@ -37,7 +37,7 @@ namespace engine
 
 	void ModelDynamic::create(Mesh * mesh)
 	{
-		size = mesh->getIndex()->size();
+		size = (uint32_t)mesh->getIndex()->size();
 
 		// Bind VAO
 		glBindVertexArray(vaoID);

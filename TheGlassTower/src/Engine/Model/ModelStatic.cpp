@@ -4,7 +4,7 @@ namespace engine
 {
 	ModelStatic::ModelStatic(Mesh * mesh)
 	{
-		size = mesh->getIndex()->size();
+		size = (uint32_t)mesh->getIndex()->size();
 
 		glGenVertexArrays(1, &vaoID);
 		glBindVertexArray(vaoID);
