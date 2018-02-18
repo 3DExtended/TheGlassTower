@@ -1,7 +1,9 @@
 #pragma once
-
-#include "Engine/Display.h"
-#include "Engine/Input.h"
+#include "AGame.h"
+#include "Display.h"
+#include "Input.h"
+#include <vector>
+#include <mutex>
 
 namespace engine
 {
@@ -17,10 +19,18 @@ namespace engine
 		void terminate();
 
 		// run game
-		void runGame();
+		void runGame(AGame * game);
 
 	private:
-		// initialized?
+
+		// initialized
 		bool m_initialized = false;
+
+		// game Thread
+		void gameThread(AGame * game);
+
+		// game lists
+		std::vector<AGame *> m_games;
+		std::mutex m_gameLock;
 	};
 }

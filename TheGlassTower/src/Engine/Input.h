@@ -1,5 +1,6 @@
 #pragma once
 #include <stdint.h>
+#include "SDL2\SDL.h"
 
 namespace engine {
 	class Input {
@@ -34,7 +35,24 @@ namespace engine {
 		int32_t getMouseScrollX();
 		int32_t getMouseScrollY();
 
+		// Running
+		bool isRunning();
+
+		// Delta
+		float getDelta();
+
 	private:
+		// Event
+		SDL_Event event;
+
+		// Running
+		bool m_isRunning = true;
+
+		// Delta
+		float m_delta;
+		uint32_t m_last;
+		uint32_t m_now;
+
 		// Mouse Position
 		int32_t m_mousePosX;
 		int32_t m_mousePosY;
@@ -62,7 +80,6 @@ namespace engine {
 		void setMouseScroll(int32_t x, int32_t y);
 
 		// Pre and Post
-		void inputPreUpdate();
-		void inputPostUpdate();
+		void update();
 	};
 }

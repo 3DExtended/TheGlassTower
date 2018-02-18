@@ -73,6 +73,14 @@ namespace engine
 	{
 		return m_mouseScrollY;
 	}
+	bool Input::isRunning()
+	{
+		return m_isRunning;
+	}
+	float Input::getDelta()
+	{
+		return m_delta;
+	}
 	void Input::setKeyState(int32_t scanCode, bool isDown)
 	{
 		m_keyIsDown[scanCode] = isDown;
@@ -95,8 +103,9 @@ namespace engine
 		m_mouseScrollX = x;
 		m_mouseScrollY = y;
 	}
-	void Input::inputPreUpdate()
+	void Input::update()
 	{
+		// Prepare
 		for (uint32_t i = 0; i < SDL_NUM_SCANCODES; i++)
 		{
 			m_keyIsEvent[i] = false;
@@ -109,8 +118,43 @@ namespace engine
 		m_mouseSpeedY = 0;
 		m_mouseScrollX = 0;
 		m_mouseScrollY = 0;
-	}
-	void Input::inputPostUpdate()
-	{
+
+		// Delta
+		m_now = SDL_GetTicks();
+		m_delta = ((float)(m_now - m_last)) / 1000.0f;
+		m_last = m_now;
+
+		// Event Handling
+		while (SDL_PollEvent(&event))
+		{
+			if (event.type == SDL_WINDOWEVENT_CLOSE)
+			{
+				m_isRunning = false;
+			}
+			else if (event.type == SDL_KEYDOWN)
+			{
+				setKeyState(event.key.keysym.scancode, true);
+			}
+			else if (event.type == SDL_KEYUP)
+			{
+				setKeyState(event.key.keysym.scancode, false);
+			}
+			else if (event.type == SDL_MOUSEBUTTONUP)
+			{
+				setButtonState(event.button.button, false);
+			}
+			else if (event.type == SDL_MOUSEBUTTONDOWN)
+			{
+				setButtonState(event.button.button, true);
+			}
+			else if (event.type == SDL_MOUSEMOTION)
+			{
+				setMousePosition(event.motion.x, event.motion.y);
+			}
+			else if (event.type == SDL_MOUSEWHEEL)
+			{
+				setMouseScroll(event.wheel.x, event.wheel.y);
+			}
+		}
 	}
 }

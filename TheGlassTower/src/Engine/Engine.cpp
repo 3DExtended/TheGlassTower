@@ -1,5 +1,6 @@
 #include "Engine.h"
 #include <SDL2/SDL.h>
+#include <chrono>
 
 namespace engine
 {
@@ -13,8 +14,8 @@ namespace engine
 	{
 		if (!m_initialized)
 		{
+			// SetUp
 			glewExperimental = GL_TRUE;
-
 			if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 			{
 				m_initialized = false;
@@ -31,69 +32,78 @@ namespace engine
 	{
 		if (m_initialized)
 		{
-			m_initialized = false;
+			while (true)
+			{
+				// Erase
+				m_gameLock.lock();
+				for (auto it = m_games.begin(); it != m_games.end(); it++)
+				{
+					if ((*it)->done)
+					{
+						delete (*it);
+						m_games.erase(it);
+						break;
+					}
+				}
+				// Break
+				if (m_games.size() == 0)
+				{
+					m_initialized = false;
+					m_gameLock.unlock();
+					break;
+				}
+				m_gameLock.unlock();
+				// Thread has done some work and is tired now
+				{
+					using namespace std::chrono_literals;
+					std::this_thread::sleep_for(100ms);
+				}
+			}
+			// TearDown
 			SDL_Quit();
 		}
 	}
-	void Engine::runGame()
+	void Engine::runGame(AGame * game)
 	{
 		// Check if engine is initialized
+		m_gameLock.lock();
 		if (!m_initialized)
 		{
+			m_gameLock.unlock();
 			return;
 		}
-
+		
+		// Start thread
+		game->thread = new std::thread(&engine::Engine::gameThread, this, game);
+		m_games.push_back(game);
+		m_gameLock.unlock();
+	}
+	void Engine::gameThread(AGame * game)
+	{
 		// SetUp
-		Display * display = new Display(800, 600, "The Glass Tower");
-		Input * input = new Input();
+		game->display = new Display(800, 600, "The Glass Tower");
+		game->input = new Input();
 
-		std::cout << "Test" << std::endl;
-		bool isRunning = true;
-		SDL_Event e;
+		// Main Loop
+		while (game->input->isRunning()) {
+			// Input
+			game->input->update();
 
-		//main loop of gameengine
-		while (isRunning) {
-			//pull sdl events (Key and mouse events, quit event etc.)
-			input->inputPreUpdate();
-			while (SDL_PollEvent(&e)) {
-				if (e.type == SDL_QUIT) {	//Quit event is triggered after hitting the red X in the upper right corner
-					isRunning = false;
-				}
-				else if (e.type == SDL_KEYDOWN) {
-					input->setKeyState(e.key.keysym.scancode, true);
-				}
-				else if (e.type == SDL_KEYUP) {
-					input->setKeyState(e.key.keysym.scancode, false);
-				}
-				else if (e.type == SDL_MOUSEBUTTONUP) {
-					input->setButtonState(e.button.button, false);
-				}
-				else if (e.type == SDL_MOUSEBUTTONDOWN) {
-					input->setButtonState(e.button.button, true);
-				}
-				else if (e.type == SDL_MOUSEMOTION) {
-					input->setMousePosition(e.motion.x, e.motion.y);
-				}
-				else if (e.type == SDL_MOUSEWHEEL) {
-					input->setMouseScroll(e.wheel.x, e.wheel.y);
-				}
-			}
-			input->inputPostUpdate();
+			// Update
 
-			//Update gameState
-			//sceneHandler->Update();
+			// Clear
+			game->display->clearBuffer();
 
-			//clear old buffer so we can render on it
-			//display->ClearBuffer();
+			// Render
 
-			//Render Game
-			//sceneHandler->Render();
 
-			//render text
-			//FontHandler::RenderAllFonts();
-
-			//swap buffer
-			display->swapBuffer();
+			// Swap
+			game->display->swapBuffer();
 		}
+
+		// TearDown
+		delete game->input;
+		delete game->display;
+		game->done = true;
 	}
 }
