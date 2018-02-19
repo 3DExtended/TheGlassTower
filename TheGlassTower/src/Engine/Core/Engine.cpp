@@ -14,18 +14,44 @@ namespace engine
 	{
 		if (!m_initialized)
 		{
-			// SetUp
+			// SetUp SDL
 			glewExperimental = GL_TRUE;
 			if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 			{
-				m_initialized = false;
 				std::cerr << "Could not init SDL2. Received following error: " << SDL_GetError() << std::endl;
+				return;
 			}
-			else
+			// SetUp PhysX Foundation
+			m_pxFoundation = PxCreateFoundation(PX_FOUNDATION_VERSION, m_pxDefaultAllocatorCallback, m_pxDefaultErrorCallback);
+			if (!m_pxFoundation)
 			{
-				m_initialized = true;
-				std::cout << "Successfully init SDL2" << std::endl;
+				std::cerr << "Could not init PhysX Foundation." << std::endl;
+				return;
 			}
+			// SetUp PhysX
+			bool recordMemoryAllocations = true;
+			m_pxPhysics = PxCreatePhysics(PX_PHYSICS_VERSION, * m_pxFoundation,
+				physx::PxTolerancesScale(), recordMemoryAllocations);
+			if (!m_pxPhysics)
+			{
+				std::cerr << "Could not init PhysX." << std::endl;
+				return;
+			}
+			// SetUp PhysX Cooking
+			m_pxCooking = PxCreateCooking(PX_PHYSICS_VERSION, *m_pxFoundation, physx::PxCookingParams(physx::PxTolerancesScale()));
+			if (!m_pxCooking)
+			{
+				std::cerr << "Could not init PhysX Cooking." << std::endl;
+				return;
+			}
+			// SetUp PhysX Extensions
+			if (!PxInitExtensions(*m_pxPhysics, nullptr))
+			{
+				std::cerr << "Could not init PhysX Extensions." << std::endl;
+				return;
+			}
+			// Done
+			m_initialized = true;
 		}
 	}
 	void Engine::terminate()
@@ -59,7 +85,15 @@ namespace engine
 					std::this_thread::sleep_for(100ms);
 				}
 			}
-			// TearDown
+			// TearDown Extensions
+			PxCloseExtensions();
+			// TearDown Cooking
+			m_pxCooking->release();
+			// TearDown PhysX
+			m_pxPhysics->release();
+			// TearDown PhysX Foundation
+			m_pxFoundation->release();
+			// TearDown SDL
 			SDL_Quit();
 		}
 	}

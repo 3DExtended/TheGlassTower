@@ -33,5 +33,12 @@ namespace engine
 		// game lists
 		std::vector<AGame *> m_games;
 		std::mutex m_gameLock;
+
+		// PhysX
+		physx::PxDefaultErrorCallback m_pxDefaultErrorCallback;
+		physx::PxDefaultAllocator m_pxDefaultAllocatorCallback;
+		physx::PxFoundation * m_pxFoundation;
+		physx::PxPhysics * m_pxPhysics;
+		physx::PxCooking * m_pxCooking;
 	};
 }
