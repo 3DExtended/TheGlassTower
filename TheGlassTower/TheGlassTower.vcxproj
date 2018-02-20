@@ -159,6 +159,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Engine\Core\AGameObject.cpp" />
     <ClCompile Include="src\Main\SceneTest.cpp" />
     <ClCompile Include="src\Engine\Core\AScene.cpp" />
     <ClCompile Include="src\Engine\Model\AModel.cpp" />
@@ -179,6 +180,7 @@
     <ClCompile Include="src\_ThirdParty\lodepng.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Engine\Core\AGameObject.h" />
     <ClInclude Include="src\Main\SceneTest.h" />
     <ClInclude Include="src\Engine\Core\AScene.h" />
     <ClInclude Include="src\Engine\Model\AModel.h" />
