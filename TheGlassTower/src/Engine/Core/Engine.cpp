@@ -21,6 +21,9 @@ namespace engine
 				std::cerr << "Could not init SDL2. Received following error: " << SDL_GetError() << std::endl;
 				return;
 			}
+			// SetUp PhysX Callbacks
+			m_pxDefaultAllocatorCallback = physx::PxDefaultAllocator();
+			m_pxDefaultErrorCallback = physx::PxDefaultErrorCallback();
 			// SetUp PhysX Foundation
 			m_pxFoundation = PxCreateFoundation(PX_FOUNDATION_VERSION, m_pxDefaultAllocatorCallback, m_pxDefaultErrorCallback);
 			if (!m_pxFoundation)
@@ -30,8 +33,7 @@ namespace engine
 			}
 			// SetUp PhysX
 			bool recordMemoryAllocations = true;
-			m_pxPhysics = PxCreatePhysics(PX_PHYSICS_VERSION, * m_pxFoundation,
-				physx::PxTolerancesScale(), recordMemoryAllocations);
+			m_pxPhysics = PxCreatePhysics(PX_PHYSICS_VERSION, * m_pxFoundation, physx::PxTolerancesScale(), recordMemoryAllocations);
 			if (!m_pxPhysics)
 			{
 				std::cerr << "Could not init PhysX." << std::endl;
