@@ -119,7 +119,7 @@ namespace engine
 		// SetUp
 		game->m_display = new Display(800, 600, "The Glass Tower");
 		game->m_input = new Input();
-		game->ag_create();
+		game->create();
 
 		// Main Loop
 		while (game->m_input->isRunning()) {
@@ -127,20 +127,20 @@ namespace engine
 			game->m_input->update();
 
 			// Update
-			game->ag_update();
+			game->update();
 
 			// Clear
 			game->m_display->clearBuffer();
 
 			// Render
-			game->ag_render();
+			game->render();
 
 			// Swap
 			game->m_display->swapBuffer();
 		}
 
 		// TearDown
-		game->ag_destroy();
+		game->destroy();
 		delete game->m_input;
 		delete game->m_display;
 		game->m_done = true;

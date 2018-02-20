@@ -25,12 +25,6 @@ namespace engine
 		Input * getInput();
 
 	private:
-		// Game Methods
-		void ag_create();
-		void ag_destroy();
-		void ag_update();
-		void ag_render();
-
 		// Display
 		Display * m_display;
 
