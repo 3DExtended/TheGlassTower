@@ -1,6 +1,7 @@
 #pragma once
 #include "Input.h"
 #include "Display.h"
+#include "Engine.h"
 #include <thread>
 
 namespace engine
@@ -23,8 +24,12 @@ namespace engine
 
 		// Get Input
 		Input * getInput();
-
+		// Get Engine
+		Engine * getEngine();
 	private:
+		// Engine
+		Engine * m_engine;
+
 		// Display
 		Display * m_display;
 

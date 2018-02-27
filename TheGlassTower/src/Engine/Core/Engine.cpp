@@ -1,6 +1,7 @@
 #include "Engine.h"
 #include <SDL2/SDL.h>
 #include <chrono>
+#include "AGame.h"
 
 namespace engine
 {
@@ -114,9 +115,14 @@ namespace engine
 		m_games.push_back(game);
 		m_gameLock.unlock();
 	}
+	physx::PxPhysics * Engine::getPhysics()
+	{
+		return m_pxPhysics;
+	}
 	void Engine::gameThread(AGame * game)
 	{
 		// SetUp
+		game->m_engine = this;
 		game->m_display = new Display(800, 600, "The Glass Tower");
 		game->m_input = new Input();
 		game->create();

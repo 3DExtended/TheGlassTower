@@ -1,4 +1,5 @@
 #pragma once
+#include "AScene.h"
 
 namespace engine
 {

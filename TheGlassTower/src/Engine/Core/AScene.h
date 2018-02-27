@@ -1,11 +1,12 @@
 #pragma once
 #include "AGame.h"
-#include "AGameObject.h"
+#include "Engine/Physic/PScene.h"
 #include <vector>
 #include <mutex>
 
 namespace engine
 {
+	class AGameObject;
 	class AScene
 	{
 	public:
@@ -24,13 +25,15 @@ namespace engine
 		// Get and Set Game
 		void setGame(AGame * game);
 		AGame * getGame();
+
+		// Get PScene
+		PScene * getPScene();
 	private:
 		// Game Instance
 		AGame * m_game;
 
-		// Loop Methods
-		virtual void update() = 0; // REMOVE
-		virtual void render() = 0; // REMOVE
+		// Physic
+		PScene * m_pScene;
 
 		// Create and Destroy
 		virtual void create() = 0;

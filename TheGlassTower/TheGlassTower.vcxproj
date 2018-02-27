@@ -159,6 +159,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Main\GOPlane.cpp" />
+    <ClCompile Include="src\Main\GOSphere.cpp" />
+    <ClCompile Include="src\Engine\Physic\PScene.cpp" />
     <ClCompile Include="src\Engine\Core\AGameObject.cpp" />
     <ClCompile Include="src\Main\SceneTest.cpp" />
     <ClCompile Include="src\Engine\Core\AScene.cpp" />
@@ -180,6 +183,9 @@
     <ClCompile Include="src\_ThirdParty\lodepng.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Main\GOPlane.h" />
+    <ClInclude Include="src\Main\GOSphere.h" />
+    <ClInclude Include="src\Engine\Physic\PScene.h" />
     <ClInclude Include="src\Engine\Core\AGameObject.h" />
     <ClInclude Include="src\Main\SceneTest.h" />
     <ClInclude Include="src\Engine\Core\AScene.h" />

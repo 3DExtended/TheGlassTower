@@ -12,4 +12,8 @@ namespace engine
 	{
 		return m_input;
 	}
+	Engine * AGame::getEngine()
+	{
+		return m_engine;
+	}
 }

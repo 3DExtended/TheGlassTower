@@ -1,4 +1,5 @@
 #include "AScene.h"
+#include "AGameObject.h"
 
 namespace engine
 {
@@ -16,6 +17,10 @@ namespace engine
 	{
 		return m_game;
 	}
+	PScene * AScene::getPScene()
+	{
+		return m_pScene;
+	}
 	void AScene::s_update()
 	{
 		// ADD GameObject
@@ -24,23 +29,29 @@ namespace engine
 		remGameObject();
 		// Pre Update
 		sgo_preUpdate();
+		// PhysX Scene Launch
+		m_pScene->step(m_game->getInput()->getDelta());
 		// Update
 		sgo_update();
+		// PhysX Scene Fetch
+		m_pScene->fetch();
 		// Post Update
 		sgo_postUpdate();
-		// FOR TESTING
-		update();
 	}
 	void AScene::s_render()
 	{
-
-		// FOR TESTING
-		render();
+		// TESTING
+		for (auto it : m_gameObjects)
+		{
+			it->render();
+		}
 	}
 	void AScene::s_create()
 	{
-		// Scene Create
-
+		// Physic Create
+		m_pScene = new PScene();
+		m_pScene->m_engine = m_game->getEngine();
+		m_pScene->create();
 		// Pass
 		create();
 	}
@@ -48,8 +59,9 @@ namespace engine
 	{
 		// Pass
 		destroy();
-		// Scene Destroy
-
+		// Physic Destroy
+		m_pScene->destroy();
+		delete m_pScene;
 	}
 	void AScene::sgo_preUpdate()
 	{

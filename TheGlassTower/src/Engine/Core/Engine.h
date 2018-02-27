@@ -1,5 +1,4 @@
 #pragma once
-#include "AGame.h"
 #include "Display.h"
 #include "Input.h"
 #include "PhysX/PxPhysicsAPI.h"
@@ -8,6 +7,7 @@
 
 namespace engine
 {
+	class AGame;
 	class Engine
 	{
 	public:
@@ -22,6 +22,8 @@ namespace engine
 		// run game
 		void runGame(AGame * game);
 
+		// PhysX
+		physx::PxPhysics * getPhysics();
 	private:
 
 		// initialized
