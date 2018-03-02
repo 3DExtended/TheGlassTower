@@ -5,11 +5,11 @@
 #include "Engine/Texture/Texture2D.h"
 #include "glm/gtc/matrix_transform.hpp"
 
-class GOSphere : public engine::AGameObject
+class GOCapsule : public engine::AGameObject
 {
 public:
-	GOSphere();
-	~GOSphere();
+	GOCapsule();
+	~GOCapsule();
 
 private:
 	// Create and Destroy
@@ -21,9 +21,9 @@ private:
 
 	virtual void render(); // REMOVE ME
 
-	// Sphere
-	engine::ModelStatic * modelSphere;
-	glm::mat4 matSphere;
+	// Capsule
+	engine::ModelStatic * modelCapsule;
+	glm::mat4 matCapsule;
 	glm::vec3 pos;
 	glm::quat rot;
 
@@ -35,6 +35,6 @@ private:
 
 	// PhysX
 	physx::PxMaterial * gMaterial;
-	physx::PxRigidDynamic * pxSphere;
+	physx::PxRigidDynamic * pxCapsule;
 };
 

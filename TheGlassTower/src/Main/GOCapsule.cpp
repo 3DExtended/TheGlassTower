@@ -1,19 +1,22 @@
-#include "GOSphere.h"
+#include "GOCapsule.h"
 
-GOSphere::GOSphere()
+
+
+GOCapsule::GOCapsule()
 {
 }
 
-GOSphere::~GOSphere()
+
+GOCapsule::~GOCapsule()
 {
 }
 
-void GOSphere::create()
+void GOCapsule::create()
 {
 	// Model
 	engine::Mesh * mesh = new engine::Mesh();
-	mesh->loadOBJ("res/Model/sphere.obj");
-	modelSphere = new engine::ModelStatic(mesh);
+	mesh->loadOBJ("res/Model/capsule.obj");
+	modelCapsule = new engine::ModelStatic(mesh);
 	delete mesh;
 
 	// Shader
@@ -31,19 +34,23 @@ void GOSphere::create()
 	// Matrix
 	view = glm::lookAt(glm::vec3(0.0f, 4.0f, -10.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	proj = glm::perspective(glm::radians(70.0f), 800.0f / 600.0f, 0.1f, 100.0f);
-	matSphere = glm::mat4(1.0f);
+	matCapsule = glm::mat4(1.0f);
 
 	// PhysX
 	gMaterial = getScene()->getGame()->getEngine()->getPhysics()->createMaterial(0.5f, 0.5f, 0.6f);
-	pxSphere = physx::PxCreateDynamic(*getScene()->getGame()->getEngine()->getPhysics(), physx::PxTransform(physx::PxVec3(0.1f, 10, 0)), physx::PxSphereGeometry(1.0f), *gMaterial, 1.0f);
-	getScene()->getPScene()->m_pxScene->addActor(*pxSphere);
+	pxCapsule = getScene()->getGame()->getEngine()->getPhysics()->createRigidDynamic(physx::PxTransform(physx::PxVec3(0,1,0)));
+	physx::PxTransform relativePose(physx::PxQuat(physx::PxHalfPi, physx::PxVec3(0, 0, 1)));
+	physx::PxShape* aCapsuleShape = physx::PxRigidActorExt::createExclusiveShape(*pxCapsule, physx::PxCapsuleGeometry(0.5f,0.5f), *gMaterial);
+	aCapsuleShape->setLocalPose(relativePose);
+	physx::PxRigidBodyExt::updateMassAndInertia(*pxCapsule, 1.0f);
+	getScene()->getPScene()->m_pxScene->addActor(*pxCapsule);
 }
 
-void GOSphere::destroy()
+void GOCapsule::destroy()
 {
 	// PhysX
-	getScene()->getPScene()->m_pxScene->removeActor(*pxSphere);
-	pxSphere->release();
+	getScene()->getPScene()->m_pxScene->removeActor(*pxCapsule);
+	pxCapsule->release();
 	gMaterial->release();
 
 	// Texture
@@ -55,12 +62,12 @@ void GOSphere::destroy()
 	delete shader;
 
 	// Model
-	delete modelSphere;
+	delete modelCapsule;
 }
 
-void GOSphere::postUpdate()
+void GOCapsule::postUpdate()
 {
-	physx::PxTransform t = pxSphere->getGlobalPose();
+	physx::PxTransform t = pxCapsule->getGlobalPose();
 	pos.x = t.p.x;
 	pos.y = t.p.y;
 	pos.z = t.p.z;
@@ -70,7 +77,7 @@ void GOSphere::postUpdate()
 	rot.w = t.q.w;
 }
 
-void GOSphere::render()
+void GOCapsule::render()
 {
 	// Shader
 	shader->bind();
@@ -78,9 +85,9 @@ void GOSphere::render()
 	texture->bind(0);
 
 	// Sphere
-	matSphere = glm::translate(glm::mat4(1.0f), pos) * glm::mat4_cast(rot);
-	shader->pushMatrix("matTrans", proj * view * matSphere);
-	modelSphere->render();
+	matCapsule = glm::translate(glm::mat4(1.0f), pos) * glm::mat4_cast(rot);
+	shader->pushMatrix("matTrans", proj * view * matCapsule);
+	modelCapsule->render();
 
 	// Shader
 	texture->unbind(0);

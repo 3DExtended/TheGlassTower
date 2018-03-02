@@ -81,6 +81,9 @@
     <ClCompile Include="src\Main\GOPlane.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="src\Main\GOCapsule.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Main\stdafx.h">
@@ -147,6 +150,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="src\Main\GOPlane.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Main\GOCapsule.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
