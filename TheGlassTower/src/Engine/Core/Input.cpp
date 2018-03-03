@@ -124,7 +124,7 @@ namespace engine
 		m_now = SDL_GetTicks();
 		m_delta = ((float)(m_now - m_last)) / 1000.0f;
 		m_last = m_now;
-		if (m_delta <= 0.0f || m_delta >= 1.0f)
+		if (m_delta <= 0.015f || m_delta >= 0.017f)
 			m_delta = 0.016f;
 
 		// Event Handling
