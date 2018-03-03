@@ -1,3 +1,6 @@
 [submodule "TheGlassTower/Dependencies"]
 	path = TheGlassTower/Dependencies
 	url = https://bitbucket.org/theglasstower/contentheglasstower
+[submodule "serverfilesglasstower"]
+	path = Server/x64/serverfilesglasstower
+	url = https://bitbucket.org/theglasstower/serverfilesglasstower
